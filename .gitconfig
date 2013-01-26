@@ -1,14 +1,15 @@
 # core {{{
 [core]
-    editor= /usr/bin/vi
-    excludesfile = /Users/nick/.gitignore_global
-    pager=less -x4
+    editor = mate
+    excludesfile = /Users/brett/.gitignore_global
+    #pager=less -x4
+    pager=less -FRXS
 
 #}}}
 # user {{{
 [user]
-	email = nick@durdn.com
-	name = Nicola Paolucci
+	email = brettveenstra@gmail.com
+	name = Brett Veenstra
 
 #}}}
 # color {{{

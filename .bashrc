@@ -1,6 +1,8 @@
 # .bashrc
 # Author: Nicola Paolucci <nick@durdn.com>
-# Source: http://github.com/durdn/cfg/.bashrc
+# Source: http://github.com/brettveenstra/cfg/.bashrc
+# Edited: 01/26/2013, Brett Veenstra <brettveenstra@gmail.com>
+
 
 #Global options {{{
 export HISTFILESIZE=999999
@@ -23,11 +25,11 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-#path should have durdn config bin folder
+#path should have brettveenstra config bin folder
 export PATH=$HOME/.cfg/bin:$PATH
 #set the terminal type to 256 colors
 export TERM=xterm-256color
-
+export EDITOR="$HOME/bin/mate -w"
 
 # }}}
 # Tmux startup {{{
@@ -52,11 +54,14 @@ hg_branch() {
     hg bookmarks 2> /dev/null | \
         awk '/\*/ { printf "[\033[0;32m" $2 "]" }'
 }
+
 # Prompt ir_black {{{
 function prompt-irblack {
   local WHITE="\[\033[1;37m\]"
   local BLACK="\[\033[0;30m\]"
-  local BLUE="\[\033[0;34m\]"
+#  local BLUE="\[\033[0;34m\]"
+#  local BLUE="\[\033[0;35m\]"
+  local BLUE="\[\033[0;36m\]"
   local LIGHT_BLUE="\[\033[1;34m\]"
   local CYAN="\[\033[0;36m\]"
   local RED="\[\033[0;31m\]"
@@ -85,6 +90,7 @@ $LIGHT_GRAY\n\$ "
 PS2='> '
 PS4='+ '
 }
+
 # }}}
 # Prompt solarized {{{
 function prompt-solarized {
@@ -125,7 +131,7 @@ export LS_COLORS="di=34:ln=1;35:so=32:pi=33:ex=1;31:bd=34:cd=34:su=0;41:sg=0;46:
 prompt-irblack
 
 # }}}
-# durdn/cfg related commands {{{
+# brettveenstra/cfg related commands {{{
 function dur {
   case $1 in
   create|cr)
@@ -135,16 +141,16 @@ function dur {
     curl --user $2:$3 https://api.bitbucket.org/1.0/user/repositories 2> /dev/null | grep "name" | sed -e 's/\"//g' | col 2 | sort | uniq | column
     ;;
   clone|cl)
-    git clone git@bitbucket.org:durdn/$2.git
+    git clone git@bitbucket.org:brettveenstra/$2.git
     ;;
   install|i)
     $HOME/.cfg/install.sh
     ;;
   reinstall|re)
-    curl -Ls https://raw.github.com/durdn/cfg/master/install.sh | bash
+    curl -Ls https://raw.github.com/brettveenstra/cfg/master/install.sh | bash
     ;;
   move|mv)
-    git remote add bitbucket git@bitbucket.org:durdn/$(basename $(pwd)).git
+    git remote add bitbucket git@bitbucket.org:brettveenstra/$(basename $(pwd)).git
     git push --all bitbucket
     ;;
   trackall|tr)
@@ -164,7 +170,7 @@ function dur {
     typeset -f $2
     ;;
   help|h|*)
-    echo "[dur]dn shell automation tools - (c) 2011 Nicola Paolucci nick@durdn.com"
+    echo "[dur]dn shell automation tools - (c) 2011 Nicola Paolucci nick@brettveenstra.com"
     echo "commands available:"
     echo " [cr]eate, [li]st, [cl]one"
     echo " [i]nstall,[m]o[v]e, [re]install"
@@ -226,6 +232,7 @@ complete -F _gcomp g
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 # }}}
+
 #Global aliases  {{{
 alias gs='git status '
 alias ga='git add '
